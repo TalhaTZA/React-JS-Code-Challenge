@@ -22,7 +22,7 @@ class App extends Component {
                     listId={null}
                     onAddTodoOrList={todos.createTodoList}
                   />
-                  <TodoList items={list} listId={null} toggleComplete={null} />
+                  <TodoList history={this.props.history} items={list} listId={null} toggleComplete={null} />
                 </TodosWrapper>
               );
             }}

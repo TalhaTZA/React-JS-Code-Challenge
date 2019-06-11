@@ -2,7 +2,7 @@ import React from 'react'
 
 import styled from 'styled-components'
 
-const TodoItem = ({ name, text, completed, onComplete }) => {
+const TodoItem = ({ id , name, text, completed, onComplete , history }) => {
 
   if(onComplete){
     return (
@@ -16,7 +16,7 @@ const TodoItem = ({ name, text, completed, onComplete }) => {
 
   if(!onComplete){
     return (
-      <Wrapper>
+      <Wrapper onClick={()=>{history.push(`/list/${id}`)}}>
       <code>
         <Text>{name}</Text>
       </code>

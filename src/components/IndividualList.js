@@ -17,9 +17,19 @@ class IndividualList extends Component {
             {todos => {
               const id = this.props.match.params.list_id;
               const list = todos.getList(id);
+
+              if (!list) {
+                return (
+                  <NoListWithGivenID>No List With Given ID</NoListWithGivenID>
+                );
+              }
+
               return (
                 <TodosWrapper>
-                  <AddTodoOrList listId={id} onAddTodo={todos.createTodo} />
+                  <AddTodoOrList
+                    listId={id}
+                    onAddTodoOrList={todos.createTodo}
+                  />
                   <TodoList
                     items={list.todos}
                     listId={id}
@@ -50,6 +60,12 @@ const TodosWrapper = styled.div`
   max-width: 500px;
   display: flex;
   flex-direction: column;
+`;
+
+const NoListWithGivenID = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: red;
 `;
 
 export default IndividualList;
