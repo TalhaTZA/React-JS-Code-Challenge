@@ -3,26 +3,26 @@ import { Provider, Subscribe } from "unstated";
 
 import styled from "styled-components";
 
-import TodosContainer from "./store";
+import TodosContainer from "../store";
 
-import TodoList from "./components/TodoList";
-import AddTodo from "./components/AddTodo";
+import TodoList from "./TodoList";
+import AddTodo from "./AddTodo";
 
-class App extends Component {
-  
+class IndividualList extends Component {
   render() {
     return (
       <Provider>
         <Wrapper>
           <Subscribe to={[TodosContainer]}>
             {todos => {
-              const list = todos.getList(0);
+              const id = this.props.match.params.list_id;
+              const list = todos.getList(id);
               return (
                 <TodosWrapper>
-                  <AddTodo listId={0} onAddTodo={todos.createTodo} />
+                  <AddTodo listId={id} onAddTodo={todos.createTodo} />
                   <TodoList
                     items={list.todos}
-                    listId={0}
+                    listId={id}
                     toggleComplete={todos.toggleComplete}
                   />
                 </TodosWrapper>
@@ -52,4 +52,4 @@ const TodosWrapper = styled.div`
   flex-direction: column;
 `;
 
-export default App;
+export default IndividualList;
