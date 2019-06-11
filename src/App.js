@@ -15,14 +15,32 @@ class App extends Component {
         <Wrapper>
           <Subscribe to={[TodosContainer]}>
             {todos => {
-              const list = todos.getList();
+              const id = this.props.match.params.list_id
+                ? this.props.match.params.list_id
+                : null;
+                const list = todos.getList(id);
+              
+
+              if (!list) {
+                return (
+                  <NoListWithGivenID>No List With Given ID</NoListWithGivenID>
+                );
+              }
+
               return (
                 <TodosWrapper>
                   <AddTodoOrList
-                    listId={null}
-                    onAddTodoOrList={todos.createTodoList}
+                    listId={id}
+                    onAddTodoOrList={
+                      id ? todos.createTodo : todos.createTodoList
+                    }
                   />
-                  <TodoList history={this.props.history} items={list} listId={null} toggleComplete={null} />
+                  <TodoList
+                    history={this.props.history}
+                    items={id ? list.todos : list}
+                    listId={id}
+                    toggleComplete={id ? todos.toggleComplete : null}
+                  />
                 </TodosWrapper>
               );
             }}
@@ -48,6 +66,12 @@ const TodosWrapper = styled.div`
   max-width: 500px;
   display: flex;
   flex-direction: column;
+`;
+
+const NoListWithGivenID = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: red;
 `;
 
 export default App;
