@@ -6,13 +6,19 @@ import TodoItem from './TodoItem'
 
 const TodoList = ({ items, toggleComplete , listId }) => (
   <Wrapper>
-    {items.map(item => {
+    {listId && items.map(item => {
       const onComplete = e => {
         toggleComplete(item.id,listId)
       }
 
       return <TodoItem key={item.id} {...item} onComplete={onComplete} />
     })}
+
+    {!listId && items.map((list , id) => {
+      
+      return <TodoItem key={id} {...list}  />
+    })}
+
   </Wrapper>
 )
 

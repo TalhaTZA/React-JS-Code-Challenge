@@ -3,7 +3,7 @@ import { Container } from "unstated";
 const defaultState = {
   list: [
     {
-      name: "default",
+      name: "Default List",
       filteredList: [],
       todos: [
         {
@@ -62,6 +62,10 @@ class TodosContainer extends Container {
   }
 
   getList(id) {
+    if (!id) {
+      return this.state.list;
+    }
+
     return this.state.list[id];
   }
 
@@ -102,7 +106,23 @@ class TodosContainer extends Container {
 
       const list = state.list;
 
-      console.log(list)
+      return { list };
+    });
+
+    this.syncStorage();
+  };
+
+  createTodoList = async name => {
+    await this.setState(state => {
+      const newList = {
+        name,
+        todos: [],
+        filteredList: []
+      };
+
+      state.list.push(newList);
+
+      const list = state.list;
 
       return { list };
     });

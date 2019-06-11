@@ -6,7 +6,7 @@ import styled from "styled-components";
 import TodosContainer from "../store";
 
 import TodoList from "./TodoList";
-import AddTodo from "./AddTodo";
+import AddTodoOrList from "./AddTodoOrList";
 
 class IndividualList extends Component {
   render() {
@@ -19,7 +19,7 @@ class IndividualList extends Component {
               const list = todos.getList(id);
               return (
                 <TodosWrapper>
-                  <AddTodo listId={id} onAddTodo={todos.createTodo} />
+                  <AddTodoOrList listId={id} onAddTodo={todos.createTodo} />
                   <TodoList
                     items={list.todos}
                     listId={id}

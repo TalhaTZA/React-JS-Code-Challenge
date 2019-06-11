@@ -6,25 +6,23 @@ import styled from "styled-components";
 import TodosContainer from "./store";
 
 import TodoList from "./components/TodoList";
-import AddTodo from "./components/AddTodo";
+import AddTodoOrList from "./components/AddTodoOrList";
 
 class App extends Component {
-  
   render() {
     return (
       <Provider>
         <Wrapper>
           <Subscribe to={[TodosContainer]}>
             {todos => {
-              const list = todos.getList(0);
+              const list = todos.getList();
               return (
                 <TodosWrapper>
-                  <AddTodo listId={0} onAddTodo={todos.createTodo} />
-                  <TodoList
-                    items={list.todos}
-                    listId={0}
-                    toggleComplete={todos.toggleComplete}
+                  <AddTodoOrList
+                    listId={null}
+                    onAddTodoOrList={todos.createTodoList}
                   />
+                  <TodoList items={list} listId={null} toggleComplete={null} />
                 </TodosWrapper>
               );
             }}
