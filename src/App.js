@@ -7,6 +7,7 @@ import TodosContainer from "./store";
 
 import TodoList from "./components/TodoList";
 import AddTodoOrList from "./components/AddTodoOrList";
+import FilterTodos from "./components/FilterTodos";
 
 class App extends Component {
   render() {
@@ -18,8 +19,7 @@ class App extends Component {
               const id = this.props.match.params.list_id
                 ? this.props.match.params.list_id
                 : null;
-                const list = todos.getList(id);
-              
+              const list = todos.getList(id);
 
               if (!list) {
                 return (
@@ -29,6 +29,15 @@ class App extends Component {
 
               return (
                 <TodosWrapper>
+                  {id ? (
+                    <FilterTodos
+                      type={list.filterType}
+                      id={id}
+                      onChange={todos.onFilterChange}
+                    />
+                  ) : (
+                    ""
+                  )}
                   <AddTodoOrList
                     listId={id}
                     onAddTodoOrList={
@@ -37,7 +46,7 @@ class App extends Component {
                   />
                   <TodoList
                     history={this.props.history}
-                    items={id ? list.todos : list}
+                    items={id ? ((list.filterType==="2" || list.filterType==="3")? list.filteredList :list.todos) : list}
                     listId={id}
                     toggleComplete={id ? todos.toggleComplete : null}
                   />

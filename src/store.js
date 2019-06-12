@@ -5,6 +5,7 @@ const defaultState = {
     {
       name: "Default List",
       filteredList: [],
+      filterType: "1",
       todos: [
         {
           id: 1,
@@ -117,13 +118,48 @@ class TodosContainer extends Container {
       const newList = {
         name,
         todos: [],
-        filteredList: []
+        filteredList: [],
+        filterType: "1"
       };
 
       state.list.push(newList);
 
       const list = state.list;
 
+      return { list };
+    });
+
+    this.syncStorage();
+  };
+
+  onFilterChange = async (type, listId) => {
+    await this.setState(state => {
+      const originalListTodos = state.list[listId].todos;
+
+
+      let completed = null;
+
+      if (type === "1") {
+        state.list[listId].filteredList = originalListTodos;
+      }
+
+      if (type === "2") {
+        completed = true;
+      }
+      if (type === "3") {
+        completed = false;
+      }
+
+      if (type === "2" || type === "3") {
+        state.list[listId].filteredList = originalListTodos.filter(
+          todo => todo.completed === completed
+        );
+      }
+
+      state.list[listId].filterType = type;
+
+      const list = state.list;
+      
       return { list };
     });
 
