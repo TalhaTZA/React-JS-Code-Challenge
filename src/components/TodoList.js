@@ -6,7 +6,7 @@ import TodoItem from "./TodoItem";
 
 const TodoList = ({ history, items, toggleComplete, listId }) => (
   <Wrapper>
-    {items.length < 1 && <NoTodo>No Todo in List! Add More </NoTodo>}
+    {items.length < 1 && <NoTodo>No Todo in List </NoTodo>}
 
     {listId &&
       items.map(item => {

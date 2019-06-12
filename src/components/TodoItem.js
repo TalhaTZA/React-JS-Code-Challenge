@@ -30,6 +30,7 @@ const TodoItem = ({ id , name, text, completed, onComplete , history }) => {
 const Wrapper = styled.p`
   font-size: 24px;
   cursor: pointer;
+  word-wrap: break-word;
 `
 
 const Text = styled.span`

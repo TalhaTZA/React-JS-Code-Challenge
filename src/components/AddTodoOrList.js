@@ -10,6 +10,7 @@ const AddTodoOrList = ({ onAddTodoOrList, listId }) => {
       } else {
         onAddTodoOrList(e.target.value);
       }
+      e.target.value= "";
     }
   };
 
