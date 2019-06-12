@@ -87,6 +87,8 @@ class TodosContainer extends Container {
 
       state.list[listId].todos = updated_list;
 
+      this.onFilterChange(state.list[listId].filterType,listId);
+
       const list = state.list;
 
       return { list };
@@ -105,8 +107,11 @@ class TodosContainer extends Container {
 
       state.list[listId].todos.push(item);
 
+      this.onFilterChange(state.list[listId].filterType,listId);
+
       const list = state.list;
 
+      
       return { list };
     });
 
@@ -159,7 +164,7 @@ class TodosContainer extends Container {
       state.list[listId].filterType = type;
 
       const list = state.list;
-      
+
       return { list };
     });
 
