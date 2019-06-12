@@ -14,13 +14,13 @@ class FilterTodos extends Component {
       <Fragment>
         <DropDown value={type} onChange={this.onOptionsChanged}>
           <option  value={1}>
-            All Todos
+            All
           </option>
           <option value={2}>
-            Completed
+            Active
           </option>
           <option  value={3}>
-            Un Completed
+            Completed
           </option>
         </DropDown>
       </Fragment>

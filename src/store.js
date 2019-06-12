@@ -149,10 +149,10 @@ class TodosContainer extends Container {
       }
 
       if (type === "2") {
-        completed = true;
+        completed = false;
       }
       if (type === "3") {
-        completed = false;
+        completed = true;
       }
 
       if (type === "2" || type === "3") {
